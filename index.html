@@ -107,17 +107,13 @@
     let slideInterval;
     let history = [];
 
-    const shuffleSlides = () => {
+     const shuffleSlides = () => {
       const slidesArray = Array.from(slides);
-      let currentIndex = slidesArray.findIndex(slide => !history.includes(slide));
-      if (currentIndex === -1 || history.length >= minInterval) {
-        currentIndex = Math.floor(Math.random() * slidesArray.length);
-        history = [slidesArray[currentIndex]];
-      } else {
-        history.push(slidesArray[currentIndex]);
-      }
-      slides.forEach(slide => slide.classList.remove("current"));
-      slidesArray[currentIndex].classList.add("current");
+      slidesArray.sort(() => Math.random() - 0.5);
+      slides.forEach(slide => {
+        slide.classList.remove("current");
+      });
+      slidesArray[0].classList.add("current");
     };
 
     const nextSlide = () => {
